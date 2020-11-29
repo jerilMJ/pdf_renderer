@@ -1,4 +1,4 @@
-export 'pages/pdf_page/pdf_page.dart';
+export 'pages/pdf_page/pdf_loader.dart';
 export './data/models/pdf_details.dart';
 export './data/models/pdf_file.dart';
 // import 'dart:io';
