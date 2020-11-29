@@ -9,13 +9,10 @@ import 'package:pdf_renderer/pages/pdf_page/widgets/bookmark_manager.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/models/bookmark.dart';
-import '../../data/models/pdf_view_settings_store.dart';
 import 'providers/pdf_page_state_provider/pdf_page_state_provider.dart';
 import 'widgets/pdf_widget.dart';
 import 'widgets/scroll_bar_widget.dart';
 import 'widgets/side_bar_widget.dart';
-
-import 'package:intl/intl.dart';
 
 class PDFPage extends StatefulWidget {
   const PDFPage({Key key}) : super(key: key);
