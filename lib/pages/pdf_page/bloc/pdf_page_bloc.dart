@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:pdf_renderer/data/models/bookmark.dart';
 import 'package:pdf_renderer/data/models/pdf_file.dart';
 import 'package:pdf_renderer/data/models/pdf_repository.dart';
@@ -25,7 +24,6 @@ class PDFPageBloc extends Bloc<PDFPageEvent, PDFPageState> {
     PDFPageEvent event,
   ) async* {
     if (event is PDFPageLoadEvent) {
-      bool foundLocally = true;
       File file;
 
       try {
@@ -33,25 +31,7 @@ class PDFPageBloc extends Bloc<PDFPageEvent, PDFPageState> {
         PDFFile pdfFile = event.pdfFile.copyWith(localPath: file.path);
 
         yield PDFPageLoaded(pdfFile);
-      } catch (_) {
-        foundLocally = false;
-      }
-
-      if (foundLocally) return;
-
-      try {
-        StorageReference ref =
-            FirebaseStorage.instance.ref().child(event.pdfFile.fileURL);
-        file = await _pdfRepository.downloadFile(ref);
-        PDFFile pdfFile = event.pdfFile.copyWith(localPath: file.path);
-
-        yield PDFPageLoaded(pdfFile);
-      } catch (e) {
-        yield PDFPageError(
-          fileURL: event.pdfFile.fileURL,
-          error: e,
-        );
-      }
+      } catch (_) {}
     } else if (event is BookmarkAddEvent) {
       if (!isBookmarked(event.bookmark.page)) {
         _bookmarks.add(event.bookmark);

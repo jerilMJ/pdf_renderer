@@ -20,8 +20,6 @@ dependencies:
   equatable: ^1.2.0
   async: ^2.4.1
   flutter_bloc: ^5.0.0
-  firebase_core: ^0.4.5
-  firebase_storage: ^3.1.6
   http: ^0.12.1
   printing: ^3.5.0
   image: ^2.1.12
